@@ -1,0 +1,39 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">BrotherShip</a>
+    </div>
+  <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav navbar-right">
+    {% if session.Logged_in == True %}
+      <li class="nav-item dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href='#'>
+          Logged In As {{ session.username }}
+          ({{ session.usertype }})
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="/profile/{{session.username}}">View Profile</a></li>
+          <li><a class="nav-link" href='/list'>Product List</a></li>
+          {% if session.usertype == "seller" %}
+            <li><a href='/upload/complete'>Download Excel File</a></li>
+          {% endif %}
+          <li><a href="/logout">Sign out</a></li>
+        </ul>
+      </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">
+            <span class="glyphicon glyphicon-log-in"></span> Sign In
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">
+            <span class="glyphicon glyphicon-user"></span> Create Account
+          </a>
+        </li>
+      {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

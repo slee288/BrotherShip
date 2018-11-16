@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="jumbotron text-center">
+    <h2>{{information.name}}'s profile</h2>
+      <img src="https://www.caretechfoundation.org.uk/wp-content/uploads/anonymous-person-221117.jpg" alt="Avatar">
+      <li>Company Employeed: {{information.company}}</li>
+      <li>Phone Number: {{information.phone_number}}</li>
+      <li>Email Address: {{information.email}}</li>
+  </div>
+
+  <style>
+    img {
+      width: 200px;
+      border-radius: 50%;
+    }
+  </style>
+{% endblock %}

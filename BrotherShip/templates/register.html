@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>Choose a Register Form</h2>
+		<button type="button" class="btn btn-primary btn-lg btn-block" value="seller">Create Account As Seller</a>
+		<button type="button" class="btn btn-info btn-lg btn-block" value="buyer">Create Account As Buyer</a>
+	</div>
+	<div id="sellerplat" style="display: none">
+		{% from "includes/_formhelpers.html" import render_field %}
+		<form method='POST' action="">
+			<div class='form-group'>
+				{{render_field(form.name, class_="form-control")}}
+			</div>
+			<div class='form-group'>
+		    {{render_field(form.email, class_="form-control")}}
+		  </div>
+			<div class='form-group'>
+		    {{render_field(form.username, class_="form-control")}}
+		  </div>
+			<div class='form-group'>
+		    {{render_field(form.password, class_="form-control")}}
+		  </div>
+			<div class='form-group'>
+		    {{render_field(form.confirm, class_="form-control")}}
+		  </div>
+			<div class='form-group'>
+		    {{render_field(form.phoneNumber, class_="form-control")}}
+		  </div>
+			<div class='form-group'>
+		    {{render_field(form.company, class_="form-control")}}
+		  </div>
+				<input type="hidden" name="usertype" value="seller">
+			<p><input type='submit' value='submit' class='btn btn-primary'></p>
+		</form>
+	</div>
+
+	<div id="buyerplat" style="display: none">
+		{% from "includes/_formhelpers.html" import render_field %}
+		<form method='POST' action="">
+			<div class='form-group'>
+				{{render_field(form.name, class_="form-control")}}
+			</div>
+			<div class='form-group'>
+				{{render_field(form.email, class_="form-control")}}
+				</div>
+			<div class='form-group'>
+				{{render_field(form.username, class_="form-control")}}
+				</div>
+			<div class='form-group'>
+				{{render_field(form.password, class_="form-control")}}
+			</div>
+			<div class='form-group'>
+		    {{render_field(form.confirm, class_="form-control")}}
+		  </div>
+			<div class='form-group'>
+		    {{render_field(form.phoneNumber, class_="form-control")}}
+		  </div>
+			<input type="hidden" name="usertype" value="buyer">
+			<p><input type='submit' value='submit' class='btn btn-primary'></p>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var sellerplatform = document.getElementById("sellerplat");
+	var buyerplatform = document.getElementById("buyerplat");
+
+	var registerType = document.querySelectorAll("button");
+	console.log(registerType);
+	for(var i=0; i < registerType.length; i++) {
+		registerType[i].addEventListener("click", prompt);
+	}
+
+	function prompt(e) {
+		e.preventDefault();
+		if(e.target.value === "seller") {
+			buyerplatform.style.display = "none";
+			sellerplatform.style.display = "block";
+		} else {
+			buyerplatform.style.display = "block";
+			sellerplatform.style.display = "none";
+		}
+	}
+</script>
+
+
+{% endblock %}

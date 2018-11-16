@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Download Excel File</h1><br/>
+  <form method="POST" action="">
+    <select name = "dropdown">
+      {% for package in packages %}
+      <option value = {{package.package}}>{{package.package}}</option>
+      {% endfor %}
+      <option value = 'All'>All</option>
+    </select><br/><br/>
+    <p><input type="submit" name="submit" value="Download This File" class='btn btn-primary'></p>
+    <p><a href="/" class='btn btn-primary'>Go back to main page</a></p>
+    </form>
+  {% endblock %}

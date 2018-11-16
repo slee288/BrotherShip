@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="jumbotron text-center">
+    <h1>BrotherShip</h1>
+    <p class="lead">Facilitate international trading through out leading online platform</p>
+        <a class="btn btn-primary btn-large" href="/list">View All Products!</a>
+      {% if session.usertype == "seller" %}
+        <a class="btn btn-info btn-large" href="/packagename">Add New Product!</a>
+      {% endif %}
+  </div>
+{% endblock %}

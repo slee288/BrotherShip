@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+{% block body %}  <!-- seller is logged in -->
+<div class="col-md-3">
+  <a href="#" id="company" class="list-group-item list-group-item-action">Sort by Company</a>
+  <a href="#" id="category" class="list-group-item list-group-item-action">Sort by Category</a>
+</div>
+    <h5>Filter by:</h5>
+    {% if session.usertype == "seller" %}
+      <select name = "dropdown" id='filter'>
+        <option value = "All">All</option>
+        {% for season in seasons %}
+        <option value = {{season.package}}>{{season.package}}</option>
+        {% endfor %}
+      </select>
+      <select name = "dropdown" id='filter2' style="display:none;">
+        <option value = "All">All</option>
+        {% for cat in sellCat %}
+        <option value = {{cat.category}}>{{cat.category}}</option>
+        {% endfor %}
+      </select>
+          <form method='POST' action="">
+            <div class="row" style="display:flex; flex-wrap:wrap;">
+            <ul id="items" class="list-group">
+              {% for data in datas %}
+              <div class="col-sm-6 col-md-4 thumbnail list-group-item products">
+                <img src="{{url_for('static', filename=data.picture)}}"/>
+                <h5 id={{data.package}}>package name:  {{data.package}}</h5>
+                <h5>productID:  {{data.productID}}</h5>
+                <h5>Amount in Stock: {{data.quantity}}</h5>
+                <h5 id={{data.category}}>category:   {{data.category}}</h5>
+                <h5>color:   {{data.color}}</h5>
+                <h5>price:   ${{data.price}}</h5>
+                <!--<input type='submit' name='submit' value='Edit product' class='btn btn-primary edit'>-->
+                <input type='submit' name='submit' value='Delete product' class='btn btn-primary delete'>
+                <a href="../modify/edit/{{data.productID}}" class='btn btn-primary edit'>Edit Product</a>
+              </div>
+          {% endfor %}
+          </ul>
+          </div>
+        </form>
+
+    {% else %}  <!-- buyer is logged in -->
+      <select name = "dropdown" id='filter'>
+        <option value = "All">All</option>
+        {% for user in users %}
+          <option value = {{user.company}}>{{user.company}}</option>
+        {% endfor %}
+      </select>
+      <select name = "dropdown" id='filter2' style="display:none;">
+        <option value = "All">All</option>
+        {% for category in categories %}
+          <option value = {{category.category}}>{{category.category}}</option>
+        {% endfor %}
+      </select>
+          <div class="row text-center" style="display:flex; flex-wrap:wrap;">
+            <ul id="items" class="list-group">
+            {% for eachData in allDatas %}
+            <div class="col-sm-6 col-md-3 thumbnail list-group-item products">
+                <img src="{{url_for('static', filename=eachData.picture)}}" />
+                <h5 id={{eachData.company}}>Company Name: {{eachData.company}}</h5>
+                <h5>Season:  {{eachData.package}}</h5>
+                <h5>Product ID:  {{eachData.productID}}</h5>
+                <h5 id={{eachData.category}}>Category:   {{eachData.category}}</h5>
+                <h5>Color:   {{eachData.color}}</h5>
+                <h5>Amount Available: {{eachData.quantity}}</h5>
+                <h5>Price:   ${{eachData.price}}</h5>
+                <a href="/profile/{{eachData.username}}" class='btn btn-primary'>View Uploader's Profile</a>
+            </div>
+            {% endfor %}
+            </ul>
+         </div>
+    {% endif %}
+
+<style>
+  div.thumbnail img {
+    width: 100%;
+  }
+</style>
+
+<script src="{{url_for('static', filename='prodListControl.js')}}"></script>
+{% endblock %}

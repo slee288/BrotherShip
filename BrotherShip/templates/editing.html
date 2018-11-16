@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Editing</h1>
+  {% from "includes/_formhelpers.html" import render_field %}
+  <form method='POST' action="" enctype="multipart/form-data">
+  	<div class='form-group'>
+  		{{render_field(form.productId)}}
+  	</div>
+    <div class='form-group'>
+  		{{render_field(form.productName)}}
+  	</div>
+  	<div class='form-group'>
+      {{render_field(form.category)}}
+      </div>
+  	<div class='form-group'>
+      {{render_field(form.color)}}
+      </div>
+  	<div class='form-group'>
+      {{render_field(form.material)}}
+      </div>
+  	<div class='form-group'>
+      {{render_field(form.origin)}}
+      </div>
+    <div class='form-group'>
+      {{render_field(form.price)}}
+      </div>
+    <div class='form-group'>
+      {{render_field(form.quantity)}}
+      </div>
+    <div class="form-group">
+      Choose a File<input type="file" name="file">
+    </div>
+    <br/>
+    <br/>
+    <h4>Proceed?</h4>
+    <p><input type='submit' name='submit' value='Yes' class='btn btn-primary'></p>
+    <p><input type='submit' name='submit' value='No' class='btn btn-primary'></p>
+  </form>
+  {% endblock %}

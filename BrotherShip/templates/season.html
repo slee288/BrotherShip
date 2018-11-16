@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="container">
+    <div class="row">
+        <h1 style="text-align: center;">Add in a Season</h1>
+        <div style="width:30%; margin: 25px auto;">
+
+            <form action="" method="POST">
+                <div class="form-group">
+                  <select name = "dropdown" id="options" onchange="promptInput(this)">
+                    <option value = "none">Select a Season</option>
+                    {% for data in datas %}
+                    <option value = {{data.package}}>{{data.package}}</option>
+                    {% endfor %}
+                    <option value = 'Other'>Other</option>
+                  </select>
+                  <div class="form-group">
+                    <div id='ajute' style='display: none'>Write the package name<br/><input type="text" name="packagename"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+
+            <a href="/campgrounds">Go Back</a>
+        </div>
+    </div>
+  </div>
+
+    <script>
+      function promptInput(x){
+        var selection = document.getElementById('options');
+        var ajute = document.getElementById('ajute');
+        if(selection.value === 'Other'){
+          ajute.style.display = 'block';
+        }
+        else{
+          ajute.style.display = 'none';
+        }
+      }
+    </script>
+
+
+
+
+  {% endblock %}
